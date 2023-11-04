@@ -173,7 +173,15 @@ createApp({
             }
         ],
     }
-]
+            ],
+            activeContact: 0,
+
+        }
+    },
+    methods:{
+        changeActiveContact(index){
+            this.activeContact= this.contacts[index].id
+            console.log(this.activeContact);
         }
     }
 }).mount('#app')

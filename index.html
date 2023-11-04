@@ -16,10 +16,10 @@
                 <div class="container-fluid bg-light p-0"  id="side-bar">
                     <div id="sidebar-top " class=" w-100 ">
                             <!-- TOPBAR -->
-                        <div id="top-bar" class="p-1 ps-2 d-flex">
+                        <div id="top-bar" class="p-2 ps-2 d-flex justify-content-between">
                             <div id="circlebox" class="rounded-5" style="width: 30px; height:30px;" :style="{'background-image': 'url( ' + contacts[0].avatar + ' )' } ">
                             </div>
-                            <div style="margin-left: 260px;">
+                            <div>
                                 <a href="" class="text-secondary me-2"><i class="fa-solid fa-circle-notch align-middle"></i></a>
                                 <a href="" class="text-secondary me-2"><i class="fa-solid fa-message align-middle"></i></a>
                                 <a href="" class="text-secondary me-2"><i class="fa-solid fa-ellipsis-vertical align-middle"></i></a>
@@ -36,13 +36,26 @@
                     </div>
 
                             <!-- CONTACT -->
-                    <div id="sidebar-bottom" class="w-100" v-for="(el,index) in contacts">
-                        <div  style="height: 60px" class="d-flex p-2 border-bottom "> 
+                    <div id="sidebar-bottom" class="w-100" v-for="(el,index) in contacts" >
+                        <div  style="height: 60px" class="d-flex p-2 border-bottom " @click="changeActiveContact(index)"> 
                             <div style="width: 40px; height: 40px; background-color: #e3e4e8;" class="rounded-5 overflow-hidden">
                                 <img :src="el.avatar" alt="el.name" class="w-100">
                             </div>
-                            <span class="fw-semibold ms-2" style="font-size: 0.9rem;">{{el.name}}</span>
-                            <!-- <span>{{el.}}</span> -->
+
+                            <div class="d-flex justify-content-between w-100" >
+                                <div class="d-flex flex-column ms-2">
+                                    <div class="fw-semibold " style="font-size: 0.9rem;">{{el.name}}</div>
+                                    <div style="font-size: 0.6em;">{{contacts[index].messages[ contacts[index].messages.length -1].message}}</div>
+                                    
+                                </div>
+
+                                
+                                <div style="font-size: 0.6em;">{{contacts[index].messages[ contacts[index].messages.length -1].date}}</div>
+
+                            
+                            </div>
+                            
+                            
                         </div>
                     </div> 
                             <!-- CONTACT -->
@@ -50,29 +63,53 @@
                 </div>
                 <!-- main-content -->
                 <div class="container-fluid h-100 p-0">
-                    <div id="top-bar" class="p-1 ps-2 d-flex border-start border-secondary-subtle">
-                        <div id="circlebox" class="rounded-5" style="width: 30px; height:30px;" :style="{'background-image': 'url( ' + contacts[0].avatar + ' )' } ">
+                    <div id="top-bar" class="p-2 ps-2 d-flex border-start border-secondary-subtle">
+                        <div class="d-flex justify-content-between w-100">
+                            <div class="d-flex">
+                                <div id="circlebox" class="rounded-5" style="width: 30px; height:30px;" :style="{'background-image': 'url( ' + contacts[activeContact].avatar + ' )' } ">
+                                </div>
+                                <div class="ms-2 d-flex flex-column">
+                                    <span style="font-size: 0.8em;">{{contacts[activeContact].name}}</span>
+                                    <span style="font-size: 0.6em;">ultimo accesso oggi alle{{contacts[activeContact].messages[ contacts[activeContact].messages.length -1].date}}</span>  
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <a href="" class="text-secondary me-3"><i class="fa-solid fa-search align-middle"></i></a>
+                                <a href="" class="text-secondary me-3"><i class="fa-solid fa-paperclip align-middle"></i></a>
+                                <a href="" class="text-secondary me-3"><i class="fa-solid fa-ellipsis-vertical align-middle"></i></a>
+                            </div>
                         </div>
-                        <div style="margin-left: 830px;">
-                            <a href="" class="text-secondary me-3"><i class="fa-solid fa-search align-middle"></i></a>
-                            <a href="" class="text-secondary me-3"><i class="fa-solid fa-paperclip align-middle"></i></a>
-                            <a href="" class="text-secondary me-3"><i class="fa-solid fa-ellipsis-vertical align-middle"></i></a>
-                        </div>
+                       
+                        
+                       
+                        
                     </div>
                     <div id="main-content" >
-                            <!-- DINAMIC MESSAGE -->
-                        <div>
-                            <p></p>
-                            <span></span>
-                        </div>
-
                             <!-- TEXTBAR -->
                         <div class="d-flex flex-column justify-content-end h-100">
+                                <!-- DINAMIC MESSAGE -->
+                            <div v-for="(el,index) in contacts[activeContact].messages "  >
+                                <div :class="el.status">
+                                    <p >{{el.message}}</p>
+                                    <span class="metadata">{{el.date}}<span class="time"></span>
+                                </div>
+                                
+                            </div>
+                            
+
+                            <!-- contacts[activeContact].messages[ contacts[activeContact].messages.length -1].date -->
+
+
+
+
                             <div class="row m-0" style="background-color: #e1e1de;" >
                                 <span class="p-2 col-auto" ><i class="fa-regular fa-face-smile mt-2" style="font-size: 15px;"></i></span>
                                 <input type="text" class=" border-0 col-11 rounded m-1" placeholder="scrivi un messaggio"  style="font-size: 1em;">
                                 <span class=" p-2 col-auto" id="addon-wrapping"><i class="fa-solid fa-microphone" style="font-size: 15px;"></i></span>
                             </div>
+                            
+                            
                         </div>
                         
                     </div>
