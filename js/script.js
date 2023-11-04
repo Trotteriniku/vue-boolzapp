@@ -175,13 +175,38 @@ createApp({
     }
             ],
             activeContact: 0,
+            newMessage:''
 
         }
     },
     methods:{
-        changeActiveContact(index){
-            this.activeContact= this.contacts[index].id
+        changeActiveContact(i){
+            this.activeContact= this.contacts[i].id
             console.log(this.activeContact);
-        }
+        },
+        NewMessage(){
+            this.newMessage={
+                date: this.dateConstructor(),
+                message: this.newMessage,
+                status: 'sent'
+            }
+            this.contacts[this.activeContact].messages.push( this.newMessage )
+            this.newMessage=''
+            
+            setTimeout(() => {
+                const response ={
+                    date: this.dateConstructor(),
+                    message: 'ok',
+                    status: 'received'
+                }
+                this.contacts[this.activeContact].messages.push( response )
+            }, 1000);
+        },
+        dateConstructor() {
+            const date = new Date()
+        
+            let formattedDate = date.getHours() + ':' + date.getMinutes() ;
+            return formattedDate
+        },
     }
 }).mount('#app')

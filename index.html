@@ -37,7 +37,7 @@
 
                             <!-- CONTACT -->
                     <div id="sidebar-bottom" class="w-100" v-for="(el,index) in contacts" >
-                        <div  style="height: 60px" class="d-flex p-2 border-bottom " @click="changeActiveContact(index)"> 
+                        <div  style="height: 60px" class="d-flex p-2 border-bottom conhover" @click="changeActiveContact(index)"> 
                             <div style="width: 40px; height: 40px; background-color: #e3e4e8;" class="rounded-5 overflow-hidden">
                                 <img :src="el.avatar" alt="el.name" class="w-100">
                             </div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="ms-2 d-flex flex-column">
                                     <span style="font-size: 0.8em;">{{contacts[activeContact].name}}</span>
-                                    <span style="font-size: 0.6em;">ultimo accesso oggi alle{{contacts[activeContact].messages[ contacts[activeContact].messages.length -1].date}}</span>  
+                                    <span style="font-size: 0.6em;">ultimo accesso oggi alle {{contacts[activeContact].messages[ contacts[activeContact].messages.length -1].date}}</span>  
                                 </div>
                             </div>
                             
@@ -89,13 +89,18 @@
                             <!-- TEXTBAR -->
                         <div class="d-flex flex-column justify-content-end h-100">
                                 <!-- DINAMIC MESSAGE -->
-                            <div v-for="(el,index) in contacts[activeContact].messages "  >
-                                <div :class="el.status">
-                                    <p >{{el.message}}</p>
-                                    <span class="metadata">{{el.date}}<span class="time"></span>
+                        
+                            <div v-for="(el,index) in contacts[activeContact].messages" class=" me-5 mb-1" style="margin-left: 2.1em;" >
+                                <div :class="el.status" class="message">
+                                    <div >
+                                        {{el.message}}
+                                        <span class="metadata"><span class="time">{{el.date}}</span>
+                                    </div>
+                                    
                                 </div>
-                                
                             </div>
+                        
+                            
                             
 
                             <!-- contacts[activeContact].messages[ contacts[activeContact].messages.length -1].date -->
@@ -105,7 +110,7 @@
 
                             <div class="row m-0" style="background-color: #e1e1de;" >
                                 <span class="p-2 col-auto" ><i class="fa-regular fa-face-smile mt-2" style="font-size: 15px;"></i></span>
-                                <input type="text" class=" border-0 col-11 rounded m-1" placeholder="scrivi un messaggio"  style="font-size: 1em;">
+                                <input @keyup.enter="NewMessage" v-model="newMessage" type="text" class=" border-0 col-11 rounded m-1" placeholder="scrivi un messaggio"  style="font-size: 1em;">
                                 <span class=" p-2 col-auto" id="addon-wrapping"><i class="fa-solid fa-microphone" style="font-size: 15px;"></i></span>
                             </div>
                             
