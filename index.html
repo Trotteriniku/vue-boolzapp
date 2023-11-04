@@ -29,14 +29,14 @@
                         <div id="search-bar" class="p-1 d-flex border-bottom border-secondary-subtle">
                             <div class="input-group flex-nowrap" id="search-bar-input">
                                 <span class="input-group-text " id="addon-wrapping"><i class="fa-solid fa-search" style="font-size: 10px;"></i></span>
-                                <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" aria-label="Username" aria-describedby="addon-wrapping" style="font-size: 1em;">
+                                <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" aria-label="Username" aria-describedby="addon-wrapping" style="font-size: 1em;" v-model="filteredContact"  @input="filterContact()" >
                             </div>
                             <span class="ms-2"><svg viewBox="0 0 24 24" height="15" width="15" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24"><path fill="currentColor" d="M10,18.1h4v-2h-4V18.1z M3,6.1v2h18v-2H3z M6,13.1h12v-2H6V13.1z"></path></svg></span>
                         </div>
                     </div>
 
                             <!-- CONTACT -->
-                    <div id="sidebar-bottom" class="w-100" v-for="(el,index) in contacts" >
+                    <div id="sidebar-bottom" class="w-100" v-for="(el,index) in filteredlist" >
                         <div  style="height: 60px" class="d-flex p-2 border-bottom conhover" @click="changeActiveContact(index)"> 
                             <div style="width: 40px; height: 40px; background-color: #e3e4e8;" class="rounded-5 overflow-hidden">
                                 <img :src="el.avatar" alt="el.name" class="w-100">
@@ -85,9 +85,9 @@
                        
                         
                     </div>
-                    <div id="main-content" >
+                    <div id="main-content"  >
                             <!-- TEXTBAR -->
-                        <div class="d-flex flex-column justify-content-end h-100">
+                        <div class="d-flex flex-column justify-content-end h-100 ">
                                 <!-- DINAMIC MESSAGE -->
                         
                             <div v-for="(el,index) in contacts[activeContact].messages" class=" me-5 mb-1" style="margin-left: 2.1em;" >

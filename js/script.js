@@ -175,32 +175,37 @@ createApp({
     }
             ],
             activeContact: 0,
-            newMessage:''
+            newMessage:'',
+            filteredContact:'',
+            filteredlist: this.contacts
 
         }
     },
     methods:{
         changeActiveContact(i){
-            this.activeContact= this.contacts[i].id
+            this.activeContact= parseInt(this.contacts[i].id -1)
             console.log(this.activeContact);
         },
         NewMessage(){
-            this.newMessage={
-                date: this.dateConstructor(),
-                message: this.newMessage,
-                status: 'sent'
-            }
-            this.contacts[this.activeContact].messages.push( this.newMessage )
-            this.newMessage=''
-            
-            setTimeout(() => {
-                const response ={
+            if (this.newMessage.replaceAll(' ', '')  !== '') {
+                this.newMessage={
                     date: this.dateConstructor(),
-                    message: 'ok',
-                    status: 'received'
+                    message: this.newMessage,
+                    status: 'sent'
                 }
-                this.contacts[this.activeContact].messages.push( response )
-            }, 1000);
+                this.contacts[this.activeContact].messages.push( this.newMessage )
+                this.newMessage=''
+                
+                setTimeout(() => {
+                    const response ={
+                        date: this.dateConstructor(),
+                        message: 'ok',
+                        status: 'received'
+                    }
+                    this.contacts[this.activeContact].messages.push( response )
+                }, 1000);
+            }
+            
         },
         dateConstructor() {
             const date = new Date()
@@ -208,5 +213,17 @@ createApp({
             let formattedDate = date.getHours() + ':' + date.getMinutes() ;
             return formattedDate
         },
+        filterContact(){
+            this.filteredlist= this.contacts.filter((el)=>{
+                if (el.name.toLowerCase().includes(this.filteredContact.toLowerCase())) {
+                    return el
+                }
+            })
+        }
+    },
+    mounted(){
+        this.filterContact()
     }
+
+    
 }).mount('#app')
