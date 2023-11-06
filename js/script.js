@@ -177,7 +177,8 @@ createApp({
             activeContact: 0,
             newMessage:'',
             filteredContact:'',
-            filteredlist: this.contacts
+            filteredlist: this.contacts,
+            messageIndex:null
 
         }
     },
@@ -219,7 +220,19 @@ createApp({
                     return el
                 }
             })
-        }
+        },
+        openDropdown(i){
+            if (this.messageIndex !== i) {
+                this.messageIndex = i;
+            } else{
+                this.messageIndex = null
+            }
+        },
+        deleteMessage(index){
+            this.contacts[this.activeContact].messages.splice(index,1);
+            this.messageIndex= null;
+        },
+        
     },
     mounted(){
         this.filterContact()
