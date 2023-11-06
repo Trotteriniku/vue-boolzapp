@@ -91,6 +91,9 @@
                         <div class="d-flex flex-column justify-content-end  h-100">
                                 <!-- DINAMIC MESSAGE -->
                             
+
+                            <div style="height: calc(100% - 50px);" class="overflow-y-auto">
+
                                 <div v-for="(el,index) in contacts[activeContact].messages" class=" me-5 mb-1" style="margin-left: 2.1em; ;;" >
                                     <div :class="el.status" class="message">
                                         <div class="d-flex" >
@@ -107,6 +110,9 @@
                                         
                                     </div>
                                 </div>
+
+                            </div> 
+                                
                             
                                 
 
@@ -132,12 +138,14 @@
 
 
 
-
+                            <div style="height: 50px;" >
                                 <div class="row m-0" style="background-color: #e1e1de; " >
                                     <span class="p-2 col-auto" ><i class="fa-regular fa-face-smile mt-2" style="font-size: 15px;"></i></span>
                                     <input @keyup.enter="NewMessage" v-model="newMessage" type="text" class=" border-0 col-11 rounded m-1" placeholder="scrivi un messaggio"  style="font-size: 1em;">
                                     <span class=" p-2 col-auto" id="addon-wrapping"><i class="fa-solid fa-microphone" style="font-size: 15px;"></i></span>
                                 </div>
+                            </div>
+                                
                             
                             
                         </div>
