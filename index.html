@@ -92,9 +92,9 @@
                                 <!-- DINAMIC MESSAGE -->
                             
 
-                            <div style="height: calc(100% - 50px);" class="overflow-y-auto">
+                            <div style="height: calc(100% - 50px); display: flex; flex-direction: column; justify-content: flex-end;" class="overflow-y-auto ">
 
-                                <div v-for="(el,index) in contacts[activeContact].messages" class=" me-5 mb-1" style="margin-left: 2.1em; ;;" >
+                                <div v-for="(el,index) in contacts[activeContact].messages" class=" me-5 mb-1" style="margin-left: 2.1em; " >
                                     <div :class="el.status" class="message">
                                         <div class="d-flex" >
                                             <div class="dropup order-1">
